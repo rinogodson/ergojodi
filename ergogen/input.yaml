@@ -1,49 +1,49 @@
 points:
   zones:
     matrix:
-      anchor:
-        rotate: 0
-      columns:
-        pinky:
-        ring:
-          key.splay: 0
-          key.origin: [-12, -0]
-          key.stagger: 12
-        middle:
-          key.stagger: 5
-        index:
-          key.stagger: -6
-        inner:
-          key.stagger: -2
       rows:
         bottom:
         home:
         top:
+      anchor:
+        rotate: 8
+      columns:
+        pinky:
+        ring:
+          key.origin: [-12, -u]
+          key.stagger: 10
+        middle:
+          key.stagger: 5
+        index:
+          key.stagger: -5
+        inner:
+          key.stagger: -2
     thumbfan:
       anchor:
-        ref: matrix_inner_bottom
-        shift: [-19, -23]
+        ref: matrix_index_bottom
+        shift: [0, -25]
+        rotate: -10
       columns:
         near:
         home:
-          key.spread: 20
-          key.splay: -10
+          key.spread: u
+          key.splay: -15
           key.origin: [-10, -9]
         far:
-          key.spread: 20
-          key.splay: -20
-          key.origin: [-23, -9]
+          key.spread: u
+          key.splay: -15
+          key.origin: [-30, -9]
       rows:
         thumb:
   rotate: 0
   mirror:
-    ref: matrix_pinky_home
+    ref: matrix_pinky_bottom
     distance: 250
 outlines:
   raw:
     - what: rectangle
       where: true
-      size: [25, 25]
+      size: [20, 20]
   board:
     - what: outline
       name: raw
@@ -52,3 +52,7 @@ outlines:
     - what: rectangle
       where: true
       size: [14, 14]
+  demo:
+    - what: rectangle
+      where: true
+      size: [u-1, u-1]
