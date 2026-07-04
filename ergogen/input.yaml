@@ -1,3 +1,12 @@
+units:
+  mcu_w: 20.6
+  mcu_h: 21.3
+  mcu_p: 2
+
+  trrs_w: 13
+
+  p: u+3
+
 points:
   zones:
     matrix:
@@ -6,48 +15,48 @@ points:
         home:
         top:
       anchor:
-        rotate: 8
+        shift: [160, -180]
+        rotate: 4
       columns:
         pinky:
         ring:
-          key.origin: [-12, -u]
-          key.stagger: 10
+          key:
+            origin: [-12, -u]
+            stagger: 10
+            splay: -4
         middle:
-          key.stagger: 5
+          key:
+            stagger: 5
         index:
-          key.stagger: -5
+          key:
+            stagger: -5
         inner:
-          key.stagger: -2
+          key:
+            stagger: -2
     thumbfan:
       anchor:
         ref: matrix_index_bottom
         shift: [0, -25]
-        rotate: -10
+        rotate: -15
       columns:
         near:
         home:
-          key.spread: u
-          key.splay: -15
-          key.origin: [-10, -9]
+          key:
+            spread: U
+            splay: -15
+            origin: [-10, -9]
         far:
-          key.spread: u
-          key.splay: -15
-          key.origin: [-30, -9]
+          key:
+            spread: U
+            splay: -15
+            origin: [-10, -9]
       rows:
         thumb:
   rotate: 0
-  mirror:
-    ref: matrix_pinky_bottom
-    distance: 250
+  mirror: &mirror
+    ref: thumbfan_far_thumb
+    distance: 45
 outlines:
-  raw:
-    - what: rectangle
-      where: true
-      size: [20, 20]
-  board:
-    - what: outline
-      name: raw
-      fillet: 3
   keys:
     - what: rectangle
       where: true
@@ -56,3 +65,125 @@ outlines:
     - what: rectangle
       where: true
       size: [u-1, u-1]
+  out:
+    - what: polygon
+      operation: add
+      fillet: 0.9
+      points:
+        - ref: thumbfan_near_thumb
+          shift: [-0.5p, -0.5p]
+        - ref: matrix_pinky_bottom
+          shift: [2p+mcu_p-2.5, -0.5p]
+        - ref: matrix_pinky_bottom
+          shift: [-0.5p, -0.5p]
+        - ref: matrix_pinky_top
+          shift: [-0.5p, 0.5p]
+        - ref: matrix_pinky_top
+          shift: [0.5p+1, 0.5p]
+        - ref: matrix_ring_top
+          shift: [-0.5p, 0.5p]
+        - ref: matrix_ring_top
+          shift: [0.5p, 0.5p]
+        - ref: matrix_index_top
+          shift: [0.5p, 0.5p]
+        - ref: matrix_inner_top
+          shift: [-0.5p+3, 0.5p]
+        - ref: matrix_inner_top
+          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p]
+        - ref: matrix_inner_top
+          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p-mcu_h-mcu_p]
+        - ref: matrix_inner_top
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-7]
+        - ref: matrix_inner_top
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-mcu_p-22]
+        - ref: matrix_inner_top
+          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-22]
+        - ref: thumbfan_far_thumb
+          shift: [-1p, 0.5p]
+        - ref: thumbfan_far_thumb
+          shift: [0.5p, 0.5p]
+        - ref: thumbfan_far_thumb
+          shift: [0.5p, -0.5p]
+        - ref: thumbfan_far_thumb
+          shift: [-0.5p, -0.5p]
+        - ref: thumbfan_home_thumb
+          shift: [-0.5p, -0.5p]
+    - what: rectangle
+      where: matrix_inner_bottom
+      size: [p, 2.5p]
+      fillet: 5
+      operation: add
+    - what: rectangle
+      where: matrix_middle_top
+      size: [p, p]
+      fillet: 2
+      operation: add
+    # mirror
+    - what: polygon
+      operation: add
+      fillet: 0.9
+      points:
+        - ref: mirror_thumbfan_near_thumb
+          shift: [-0.5p, -0.5p]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [2p+mcu_p-2.5, -0.5p]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [-0.5p, -0.5p]
+        - ref: mirror_matrix_pinky_top
+          shift: [-0.5p, 0.5p]
+        - ref: mirror_matrix_pinky_top
+          shift: [0.5p+1, 0.5p]
+        - ref: mirror_matrix_ring_top
+          shift: [-0.5p, 0.5p]
+        - ref: mirror_matrix_ring_top
+          shift: [0.5p, 0.5p]
+        - ref: mirror_matrix_index_top
+          shift: [0.5p, 0.5p]
+        - ref: mirror_matrix_inner_top
+          shift: [-0.5p+3, 0.5p]
+        - ref: mirror_matrix_inner_top
+          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p]
+        - ref: mirror_matrix_inner_top
+          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p-mcu_h-mcu_p]
+        - ref: mirror_matrix_inner_top
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-7]
+        - ref: mirror_matrix_inner_top
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-mcu_p-22]
+        - ref: mirror_matrix_inner_top
+          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-22]
+        - ref: mirror_thumbfan_far_thumb
+          shift: [-1p, 0.5p]
+        - ref: mirror_thumbfan_far_thumb
+          shift: [0.5p, 0.5p]
+        - ref: mirror_thumbfan_far_thumb
+          shift: [0.5p, -0.5p]
+        - ref: mirror_thumbfan_far_thumb
+          shift: [-0.5p, -0.5p]
+        - ref: mirror_thumbfan_home_thumb
+          shift: [-0.5p, -0.5p]
+    - what: rectangle
+      where: mirror_matrix_inner_bottom
+      size: [p, 2.5p]
+      fillet: 5
+      operation: add
+    - what: rectangle
+      where: mirror_matrix_middle_top
+      size: [p, p]
+      fillet: 2
+      operation: add
+  plate:
+    - what: outline
+      name: out
+      operation: add
+    - what: outline
+      name: keys
+      operation: subtract
+  pcb_plate:
+    - what: outline
+      name: out
+      operation: add
+pcbs:
+  ergojodi:
+    outlines:
+      main:
+        outline: out

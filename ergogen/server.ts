@@ -44,7 +44,6 @@ const htmlTemplate = `
             transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Collapsed State */
         body.sidebar-collapsed #sidebar {
             margin-left: -300px;
         }
@@ -74,7 +73,6 @@ const htmlTemplate = `
             cursor: pointer;
         }
 
-        /* Toggle Buttons */
         .btn-icon {
             background: transparent;
             border: none;
@@ -150,22 +148,26 @@ const htmlTemplate = `
             cursor: grabbing;
         }
         
+        /* Updated for Centering */
         #workspace {
             position: absolute;
             transform-origin: 0 0;
-            display: grid; 
+            display: inline-grid; 
             grid-template-areas: "overlap";
-            align-items: start;
-            justify-items: start;
+            align-items: center;
+            justify-items: center;
         }
         
         #workspace .svg-container {
             grid-area: overlap;
             pointer-events: none;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         #workspace svg {
             display: block;
+            max-width: none;
         }
         
         #empty-state {
@@ -214,14 +216,12 @@ const htmlTemplate = `
         const emptyDesc = document.getElementById('empty-desc');
         const overlapCheckbox = document.getElementById('overlap-checkbox');
         
-        // --- State ---
         let allFiles = [];
         let currentFile = null;
         let isOverlapMode = false;
         let activeLayers = new Set();
         const svgCache = new Map();
         
-        // --- Pan & Zoom State ---
         let scale = 1;
         let panX = 0;
         let panY = 0;
@@ -232,16 +232,11 @@ const htmlTemplate = `
         const eyeOpenPath = "M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z";
         const eyeClosedPath = "M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z";
 
-        // --- Layout Functions ---
         function toggleSidebar() {
             document.body.classList.toggle('sidebar-collapsed');
-            // Re-center SVG after sidebar transition finishes
-            setTimeout(() => {
-                renderWorkspace(true);
-            }, 300);
+            setTimeout(() => renderWorkspace(true), 300);
         }
 
-        // Keyboard Shortcut: Ctrl+B or Backslash
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey && e.key === 'b') || e.key === '\\\\') {
                 e.preventDefault();
@@ -249,7 +244,6 @@ const htmlTemplate = `
             }
         });
 
-        // --- Core Functions ---
         async function fetchSvg(filename) {
             if (svgCache.has(filename)) return svgCache.get(filename);
             const res = await fetch('/api/svg/' + encodeURIComponent(filename));
@@ -355,7 +349,8 @@ const htmlTemplate = `
             
             if (!keepState) {
                 workspace.style.transform = 'none';
-                setTimeout(() => {
+                // Wait for browser layout to calculate sizes of new SVGs
+                requestAnimationFrame(() => {
                     const rect = workspace.getBoundingClientRect();
                     const wrapperRect = wrapper.getBoundingClientRect();
                     const scaleX = (wrapperRect.width - 60) / (rect.width || 1);
@@ -364,7 +359,7 @@ const htmlTemplate = `
                     panX = (wrapperRect.width - (rect.width * scale)) / 2;
                     panY = (wrapperRect.height - (rect.height * scale)) / 2;
                     updateTransform();
-                }, 0);
+                });
             } else {
                 updateTransform();
             }
@@ -424,7 +419,7 @@ const htmlTemplate = `
 </html>
 `;
 
-// --- Server Logic (Unchanged) ---
+// --- Server Logic ---
 let sseClients: http.ServerResponse[] = [];
 
 function broadcastChange(filename: string) {
@@ -497,7 +492,7 @@ fs.watch(targetFolder, (eventType, filename) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`\n🎨 Dark Theme SVG Preview is running!`);
+  console.log(`\n🎨 Centered Dark Theme SVG Preview is running!`);
   console.log(`📁 Watching directory : ${targetFolder}`);
   console.log(`🌐 Open your browser  : http://localhost:${PORT}\n`);
 });
