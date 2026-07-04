@@ -1,6 +1,6 @@
 units:
-  mcu_w: 20.6
-  mcu_h: 21.3
+  mcu_w: 15
+  mcu_h: 20
   mcu_p: 2
 
   trrs_w: 13
@@ -15,7 +15,7 @@ points:
         home:
         top:
       anchor:
-        shift: [160, -180]
+        shift: [100, -150]
         rotate: 4
       columns:
         pinky:
@@ -55,7 +55,7 @@ points:
   rotate: 0
   mirror: &mirror
     ref: thumbfan_far_thumb
-    distance: 45
+    distance: 34
 outlines:
   keys:
     - what: rectangle
@@ -65,10 +65,14 @@ outlines:
     - what: rectangle
       where: true
       size: [u-1, u-1]
+    - what: rectangle
+      where: true
+      size: [13.5, 13.5]
+      operation: stack
   out:
     - what: polygon
       operation: add
-      fillet: 0.9
+      fillet: 2
       points:
         - ref: thumbfan_near_thumb
           shift: [-0.5p, -0.5p]
@@ -87,17 +91,17 @@ outlines:
         - ref: matrix_index_top
           shift: [0.5p, 0.5p]
         - ref: matrix_inner_top
-          shift: [-0.5p+3, 0.5p]
+          shift: [-0.5p+3, 0.5p+2]
         - ref: matrix_inner_top
-          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p]
+          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p+2]
         - ref: matrix_inner_top
-          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p-mcu_h-mcu_p]
+          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p-mcu_h-mcu_p+2]
         - ref: matrix_inner_top
-          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-7]
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p+2-7]
         - ref: matrix_inner_top
-          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-mcu_p-22]
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-mcu_p-15]
         - ref: matrix_inner_top
-          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-22]
+          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-15-7]
         - ref: thumbfan_far_thumb
           shift: [-1p, 0.5p]
         - ref: thumbfan_far_thumb
@@ -121,7 +125,7 @@ outlines:
     # mirror
     - what: polygon
       operation: add
-      fillet: 0.9
+      fillet: 2
       points:
         - ref: mirror_thumbfan_near_thumb
           shift: [-0.5p, -0.5p]
@@ -140,17 +144,17 @@ outlines:
         - ref: mirror_matrix_index_top
           shift: [0.5p, 0.5p]
         - ref: mirror_matrix_inner_top
-          shift: [-0.5p+3, 0.5p]
+          shift: [-0.5p+3, 0.5p+2]
         - ref: mirror_matrix_inner_top
-          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p]
+          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p+2]
         - ref: mirror_matrix_inner_top
-          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p-mcu_h-mcu_p]
+          shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p-mcu_h-mcu_p+2]
         - ref: mirror_matrix_inner_top
-          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-7]
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p+2-7]
         - ref: mirror_matrix_inner_top
-          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-mcu_p-22]
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-mcu_p-15]
         - ref: mirror_matrix_inner_top
-          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-22]
+          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-15-7]
         - ref: mirror_thumbfan_far_thumb
           shift: [-1p, 0.5p]
         - ref: mirror_thumbfan_far_thumb
@@ -171,6 +175,10 @@ outlines:
       size: [p, p]
       fillet: 2
       operation: add
+      # check key placing
+    # - what: outline
+    #   name: demo
+    #   operation: stack
   plate:
     - what: outline
       name: out
@@ -186,4 +194,102 @@ pcbs:
   ergojodi:
     outlines:
       main:
-        outline: out
+        outline: pcb_plate
+    footprints:
+      mx_hotswap:
+        what: mx
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      xiao_left:
+        what: xiao
+        params:
+          orientation: "up"
+          VCC5: "l_VCC5"
+          GND: "l_GND"
+          VCC3: "l_VCC3"
+          RST: "l_RST"
+          RAW: "l_RAW"
+          NFC0: "l_NFC0"
+          NFC1: "l_NFC1"
+          CLK: "l_CLK"
+          DIO: "l_DIO"
+          P0: "l_P0"
+          P1: "l_P1"
+          P2: "l_P2"
+          P3: "l_P3"
+          P4: "l_P4"
+          P5: "l_P5"
+          P6: "l_P6"
+          P7: "l_P7"
+          P8: "l_P8"
+          P9: "l_P9"
+          P10: "l_P10"
+        where:
+          ref: matrix_inner_top
+          shift: [mcu_p+mcu_w+mcu_p, mcu_p]
+          rotate: 0
+      trrs_left:
+        params:
+          side: B
+          TP: "l_TP"
+          R1: "l_R1"
+          R2: "l_R2"
+          SL: "l_SL"
+        what: trrs_pj320a
+        where:
+          ref: matrix_inner_home
+          shift: [trrs_w+9, -1.8mcu_p]
+          rotate: -90
+      trrs_right:
+        params:
+          side: B
+          TP: "r_TP"
+          R1: "r_R1"
+          R2: "r_R2"
+          SL: "r_SL"
+        what: trrs_pj320a
+        where:
+          ref: mirror_matrix_inner_home
+          shift: [trrs_w+9, -1.8mcu_p]
+          rotate: -90
+      xiao_right:
+        what: xiao
+        params:
+          orientation: "up"
+          VCC5: "r_VCC5"
+          GND: "r_GND"
+          VCC3: "r_VCC3"
+          RST: "r_RST"
+          RAW: "r_RAW"
+          NFC0: "r_NFC0"
+          NFC1: "r_NFC1"
+          CLK: "r_CLK"
+          DIO: "r_DIO"
+          P0: "r_P0"
+          P1: "r_P1"
+          P2: "r_P2"
+          P3: "r_P3"
+          P4: "r_P4"
+          P5: "r_P5"
+          P6: "r_P6"
+          P7: "r_P7"
+          P8: "r_P8"
+          P9: "r_P9"
+          P10: "r_P10"
+        where:
+          ref: mirror_matrix_inner_top
+          shift: [mcu_p+mcu_w+mcu_p, mcu_p]
+          rotate: 0
