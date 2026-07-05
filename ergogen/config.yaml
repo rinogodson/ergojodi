@@ -12,24 +12,48 @@ points:
     matrix:
       rows:
         bottom:
+          # ROW3
+          row_net: l_A2
+          mirror.row_net: r_A8
         home:
+          # ROW2
+          row_net: l_A1
+          mirror.row_net: r_A9
         top:
+          # ROW1
+          row_net: l_A0
+          mirror.row_net: r_A10
       columns:
         pinky:
+          # COL1
           key:
+            column_net: l_A10
+            mirror.column_net: r_A0
         ring:
+          # COL2
           key:
+            column_net: l_A9
+            mirror.column_net: r_A1
             origin: [-12, -u]
             stagger: 10
             splay: -4
         middle:
+          # COL3
           key:
+            column_net: l_A8
+            mirror.column_net: r_A2
             stagger: 5
         index:
+          # COL4
           key:
+            column_net: l_A7
+            mirror.column_net: r_A3
             stagger: -5
         inner:
+          # COL5
           key:
+            column_net: l_A5
+            mirror.column_net: r_A4
             stagger: -2
       anchor:
         shift: [100, -150]
@@ -41,18 +65,31 @@ points:
         rotate: -15
       columns:
         near:
-        home:
+          #COL3
           key:
+            column_net: l_A8
+            mirror.column_net: r_A2
+        home:
+          #COL4
+          key:
+            column_net: l_A7
+            mirror.column_net: r_A3
             spread: U
             splay: -15
             origin: [-10, -9]
         far:
+          #COL5
           key:
+            column_net: l_A5
+            mirror.column_net: r_A4
             spread: U
             splay: -15
             origin: [-10, -9]
       rows:
         thumb:
+          #ROW4
+          row_net: l_A3
+          mirror.row_net: r_A7
   rotate: 0
   mirror: &mirror
     ref: thumbfan_far_thumb
@@ -217,7 +254,7 @@ pcbs:
       xiao_left:
         what: xiao
         params:
-          side: F
+          side: B
           A0: l_A0
           A1: l_A1
           A10: l_A10
@@ -263,7 +300,7 @@ pcbs:
       usbc_left:
         what: usbc
         params:
-          side: F
+          side: B
           A1: l_A1u
           A12: l_A12u
           A4: l_A4u
@@ -284,11 +321,11 @@ pcbs:
         where:
           ref: matrix_inner_home
           shift: [17, -2.2mcu_p]
-          rotate: 90
+          rotate: -90
       usbc_right:
         what: usbc
         params:
-          side: F
+          side: B
           A1: r_A1u
           A12: r_A12u
           A4: r_A4u
@@ -309,11 +346,11 @@ pcbs:
         where:
           ref: mirror_matrix_inner_home
           shift: [17, -2.2mcu_p]
-          rotate: 90
+          rotate: -90
       xiao_right:
         what: xiao
         params:
-          side: F
+          side: B
           A0: r_A0
           A1: r_A1
           A10: r_A10
