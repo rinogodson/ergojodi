@@ -1,0 +1,196 @@
+module.exports = {
+  params: {
+    designator: "XX",
+    side: "F",
+    A1: { type: "net", value: "GND" },
+    A12: { type: "net", value: "GND" },
+    A4: { type: "net", value: "VBUS" },
+    A5: { type: "net", value: "CC1" },
+    A6: { type: "net", value: "DPLUSIN" },
+    A7: { type: "net", value: "DNEGIN" },
+    A8: { type: "net", value: "SBU1" },
+    A9: { type: "net", value: "VBUS" },
+    B1: { type: "net", value: "GND" },
+    B12: { type: "net", value: "GND" },
+    B4: { type: "net", value: "VBUS" },
+    B5: { type: "net", value: "CC2" },
+    B6: { type: "net", value: "DPLUSIN" },
+    B7: { type: "net", value: "DNEGIN" },
+    B8: { type: "net", value: "SBU2" },
+    B9: { type: "net", value: "VBUS" },
+    NP: { type: "net", value: "NP" },
+  },
+  body: (p) => {
+    const fp = [];
+    const flip = p.side === "B";
+    if (!flip && p.side !== "F") throw new Error("unsupported side: " + p.side);
+
+    fp.push(`(footprint "USB_C_Receptacle_HRO_TYPE-C-31-M-12"`);
+    fp.push(`(at ${p.x} ${p.y} ${flipR(flip, p.r)})`);
+    fp.push(`(layer "${flip ? "B.Cu" : "F.Cu"}")`);
+    fp.push(
+      `(property "Reference" "${p.ref}" ${p.ref_hide} (at 0 0 ${flipR(flip, p.r) % 180}) (layer "${p.side}.SilkS") (effects (font (size 1 1) (thickness 0.15))${p.side === "B" ? " (justify mirror)" : ""}))`,
+    );
+    fp.push(
+      `(property "Value" "" hide (at 0 0 ${flipR(flip, p.r) % 180}) (layer "${p.side}.Fab") (effects (font (size 1 1) (thickness 0.15))${p.side === "B" ? " (justify mirror)" : ""}))`,
+    );
+    fp.push(
+      `(property "Datasheet" "" hide (at 0 0 ${flipR(flip, p.r) % 180}) (layer "${p.side}.Fab") (effects (font (size 1 1) (thickness 0.15))${p.side === "B" ? " (justify mirror)" : ""}))`,
+    );
+    fp.push(
+      `(property "Description" "" hide (at 0 0 ${flipR(flip, p.r) % 180}) (layer "${p.side}.Fab") (effects (font (size 1 1) (thickness 0.15))${p.side === "B" ? " (justify mirror)" : ""}))`,
+    );
+
+    fp.push(
+      `(descr "USB Type-C receptacle for USB 2.0 and PD, http://www.krhro.com/uploads/soft/180320/1-1P320120243.pdf")`,
+    );
+    fp.push(`(tags "usb usb-c 2.0 pd")`);
+    fp.push(`(attr smd)`);
+
+    // Unknown to kicad2ergogen
+    fp.push(`(duplicate_pad_numbers_are_jumpers no)`);
+    fp.push(`(embedded_fonts no)`);
+
+    // Pads
+    fp.push(
+      `(pad "" np_thru_hole circle (at -2.89 ${flipN(flip, -2.6)} ${flipR(flip, p.r + 0)}) (size 0.65 0.65) (drill 0.65) (layers "*.Cu" "*.Mask") )`,
+    );
+    fp.push(
+      `(pad "" np_thru_hole circle (at 2.89 ${flipN(flip, -2.6)} ${flipR(flip, p.r + 0)}) (size 0.65 0.65) (drill 0.65) (layers "*.Cu" "*.Mask") )`,
+    );
+    fp.push(
+      `(pad "A1" smd roundrect (at -3.25 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.6 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.A1})`,
+    );
+    fp.push(
+      `(pad "A4" smd roundrect (at -2.45 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.6 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.A4})`,
+    );
+    fp.push(
+      `(pad "A5" smd roundrect (at -1.25 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.3 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.A5})`,
+    );
+    fp.push(
+      `(pad "A6" smd roundrect (at -0.25 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.3 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.A6})`,
+    );
+    fp.push(
+      `(pad "A7" smd roundrect (at 0.25 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.3 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.A7})`,
+    );
+    fp.push(
+      `(pad "A8" smd roundrect (at 1.25 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.3 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.A8})`,
+    );
+    fp.push(
+      `(pad "A9" smd roundrect (at 2.45 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.6 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.A9})`,
+    );
+    fp.push(
+      `(pad "A12" smd roundrect (at 3.25 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.6 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.A12})`,
+    );
+    fp.push(
+      `(pad "B1" smd roundrect (at 3.25 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.6 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.B1})`,
+    );
+    fp.push(
+      `(pad "B4" smd roundrect (at 2.45 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.6 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.B4})`,
+    );
+    fp.push(
+      `(pad "B5" smd roundrect (at 1.75 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.3 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.B5})`,
+    );
+    fp.push(
+      `(pad "B6" smd roundrect (at 0.75 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.3 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.B6})`,
+    );
+    fp.push(
+      `(pad "B7" smd roundrect (at -0.75 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.3 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.B7})`,
+    );
+    fp.push(
+      `(pad "B8" smd roundrect (at -1.75 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.3 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.B8})`,
+    );
+    fp.push(
+      `(pad "B9" smd roundrect (at -2.45 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.6 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.B9})`,
+    );
+    fp.push(
+      `(pad "B12" smd roundrect (at -3.25 ${flipN(flip, -4.045)} ${flipR(flip, p.r + 0)}) (size 0.6 1.45) (layers "${flip ? "B" : "F"}.Cu" "${flip ? "B" : "F"}.Mask" "${flip ? "B" : "F"}.Paste") (roundrect_rratio 0.25)  ${p.B12})`,
+    );
+    fp.push(
+      `(pad "NP" thru_hole oval (at -4.32 ${flipN(flip, -3.13)} ${flipR(flip, p.r + 0)}) (size 1 2.1) (drill oval 0.6 1.7) (property pad_prop_mechanical) (layers "*.Cu" "*.Mask") (remove_unused_layers no)  ${p.NP})`,
+    );
+    fp.push(
+      `(pad "NP" thru_hole oval (at -4.32 ${flipN(flip, 1.05)} ${flipR(flip, p.r + 0)}) (size 1 1.6) (drill oval 0.6 1.2) (property pad_prop_mechanical) (layers "*.Cu" "*.Mask") (remove_unused_layers no)  ${p.NP})`,
+    );
+    fp.push(
+      `(pad "NP" thru_hole oval (at 4.32 ${flipN(flip, -3.13)} ${flipR(flip, p.r + 0)}) (size 1 2.1) (drill oval 0.6 1.7) (property pad_prop_mechanical) (layers "*.Cu" "*.Mask") (remove_unused_layers no)  ${p.NP})`,
+    );
+    fp.push(
+      `(pad "NP" thru_hole oval (at 4.32 ${flipN(flip, 1.05)} ${flipR(flip, p.r + 0)}) (size 1 1.6) (drill oval 0.6 1.2) (property pad_prop_mechanical) (layers "*.Cu" "*.Mask") (remove_unused_layers no)  ${p.NP})`,
+    );
+
+    // Drawings on F.CrtYd
+    fp.push(
+      `(fp_line (start -5.32 ${flipN(flip, -5.27)}) (end -5.32 ${flipN(flip, 4.15)}) (stroke (width 0.05) (type solid)) (layer "${flip ? "B.CrtYd" : "F.CrtYd"}") )`,
+    );
+    fp.push(
+      `(fp_line (start -5.32 ${flipN(flip, -5.27)}) (end 5.32 ${flipN(flip, -5.27)}) (stroke (width 0.05) (type solid)) (layer "${flip ? "B.CrtYd" : "F.CrtYd"}") )`,
+    );
+    fp.push(
+      `(fp_line (start -5.32 ${flipN(flip, 4.15)}) (end 5.32 ${flipN(flip, 4.15)}) (stroke (width 0.05) (type solid)) (layer "${flip ? "B.CrtYd" : "F.CrtYd"}") )`,
+    );
+    fp.push(
+      `(fp_line (start 5.32 ${flipN(flip, -5.27)}) (end 5.32 ${flipN(flip, 4.15)}) (stroke (width 0.05) (type solid)) (layer "${flip ? "B.CrtYd" : "F.CrtYd"}") )`,
+    );
+
+    // Drawings on F.Fab
+    fp.push(
+      `(fp_line (start -4.47 ${flipN(flip, -3.65)}) (end -4.47 ${flipN(flip, 3.65)}) (stroke (width 0.1) (type solid)) (layer "${flip ? "B.Fab" : "F.Fab"}") )`,
+    );
+    fp.push(
+      `(fp_line (start -4.47 ${flipN(flip, -3.65)}) (end 4.47 ${flipN(flip, -3.65)}) (stroke (width 0.1) (type solid)) (layer "${flip ? "B.Fab" : "F.Fab"}") )`,
+    );
+    fp.push(
+      `(fp_line (start -4.47 ${flipN(flip, 3.65)}) (end 4.47 ${flipN(flip, 3.65)}) (stroke (width 0.1) (type solid)) (layer "${flip ? "B.Fab" : "F.Fab"}") )`,
+    );
+    fp.push(
+      `(fp_line (start 4.47 ${flipN(flip, -3.65)}) (end 4.47 ${flipN(flip, 3.65)}) (stroke (width 0.1) (type solid)) (layer "${flip ? "B.Fab" : "F.Fab"}") )`,
+    );
+    fp.push(
+      `(fp_text user "\${REFERENCE}" (at 0 ${flipN(flip, 0)} ${flipR(flip, p.r + 0) % 180}) (layer "${flip ? "B.Fab" : "F.Fab"}")  (effects (font (size 1 1) (thickness 0.15)) (justify${flip ? " mirror" : ""})))`,
+    );
+
+    // Drawings on F.SilkS
+    fp.push(
+      `(fp_line (start -4.7 ${flipN(flip, -1.9)}) (end -4.7 ${flipN(flip, 0.1)}) (stroke (width 0.12) (type solid)) (layer "${flip ? "B.SilkS" : "F.SilkS"}") )`,
+    );
+    fp.push(
+      `(fp_line (start -4.7 ${flipN(flip, 2)}) (end -4.7 ${flipN(flip, 3.9)}) (stroke (width 0.12) (type solid)) (layer "${flip ? "B.SilkS" : "F.SilkS"}") )`,
+    );
+    fp.push(
+      `(fp_line (start -4.7 ${flipN(flip, 3.9)}) (end 4.7 ${flipN(flip, 3.9)}) (stroke (width 0.12) (type solid)) (layer "${flip ? "B.SilkS" : "F.SilkS"}") )`,
+    );
+    fp.push(
+      `(fp_line (start 4.7 ${flipN(flip, -1.9)}) (end 4.7 ${flipN(flip, 0.1)}) (stroke (width 0.12) (type solid)) (layer "${flip ? "B.SilkS" : "F.SilkS"}") )`,
+    );
+    fp.push(
+      `(fp_line (start 4.7 ${flipN(flip, 2)}) (end 4.7 ${flipN(flip, 3.9)}) (stroke (width 0.12) (type solid)) (layer "${flip ? "B.SilkS" : "F.SilkS"}") )`,
+    );
+
+    // 3D Models
+    fp.push(
+      `(model "\${KIPRJMOD}/models/usb.step" (offset (xyz 0 -1 0)) (scale (xyz 1 1 1)) (rotate (xyz 90 -180 -180)))`,
+    );
+
+    // Properties
+    // fp.push(`(property "Reference" "REF**" (at 0 ${flipN(flip, -5.645)} ${flipR(flip, p.r + 0) % 180}) (layer "${(flip ? "B.SilkS" : "F.SilkS")}")  (effects (font (size 1 1) (thickness 0.15)) (justify${ flip ? " mirror" : ""})))`);
+    // fp.push(`(property "Value" "USB_C_Receptacle_HRO_TYPE-C-31-M-12" (at 0 ${flipN(flip, 5.1)} ${flipR(flip, p.r + 0) % 180}) (layer "${(flip ? "B.Fab" : "F.Fab")}")  (effects (font (size 1 1) (thickness 0.15)) (justify${ flip ? " mirror" : ""})))`);
+    // fp.push(`(property "Datasheet" "" (at 0 ${flipN(flip, 0)} ${flipR(flip, p.r + 0) % 180}) (unlocked yes) (layer "${(flip ? "B.Fab" : "F.Fab")}") (hide yes)  (effects (font (size 1.27 1.27) (thickness 0.15)) (justify${ flip ? " mirror" : ""})))`);
+    // fp.push(`(property "Description" "" (at 0 ${flipN(flip, 0)} ${flipR(flip, p.r + 0) % 180}) (unlocked yes) (layer "${(flip ? "B.Fab" : "F.Fab")}") (hide yes)  (effects (font (size 1.27 1.27) (thickness 0.15)) (justify${ flip ? " mirror" : ""})))`);
+
+    fp.push(")");
+    return fp.join("\n");
+  },
+};
+function normalizeAngle(angle) {
+  angle = angle % 360;
+  if (angle <= -180) angle += 360;
+  else if (angle > 180) angle -= 360;
+  return angle;
+}
+function flipR(flip, r) {
+  return normalizeAngle(flip ? 180 - r : r);
+}
+function flipN(flip, n) {
+  return flip ? -n : n;
+}

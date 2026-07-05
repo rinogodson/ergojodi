@@ -3,7 +3,7 @@ units:
   mcu_h: 20
   mcu_p: 2
 
-  trrs_w: 13
+  # trrs_w: 13
 
   p: u+3
 
@@ -14,11 +14,9 @@ points:
         bottom:
         home:
         top:
-      anchor:
-        shift: [100, -150]
-        rotate: 4
       columns:
         pinky:
+          key:
         ring:
           key:
             origin: [-12, -u]
@@ -33,6 +31,9 @@ points:
         inner:
           key:
             stagger: -2
+      anchor:
+        shift: [100, -150]
+        rotate: 4
     thumbfan:
       anchor:
         ref: matrix_index_bottom
@@ -97,11 +98,11 @@ outlines:
         - ref: matrix_inner_top
           shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p-mcu_h-mcu_p+2]
         - ref: matrix_inner_top
-          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p+2-7]
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-10.5, 0.5p-mcu_h-mcu_p+2-7]
         - ref: matrix_inner_top
-          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-mcu_p-15]
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-10.5, 0.5p-mcu_h-mcu_p-mcu_p-18]
         - ref: matrix_inner_top
-          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-15-7]
+          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-18-8]
         - ref: thumbfan_far_thumb
           shift: [-1p, 0.5p]
         - ref: thumbfan_far_thumb
@@ -150,11 +151,11 @@ outlines:
         - ref: mirror_matrix_inner_top
           shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p-mcu_h-mcu_p+2]
         - ref: mirror_matrix_inner_top
-          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p+2-7]
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-10.5, 0.5p-mcu_h-mcu_p+2-7]
         - ref: mirror_matrix_inner_top
-          shift: [0.5p+mcu_w+mcu_p+mcu_p-8, 0.5p-mcu_h-mcu_p-mcu_p-15]
+          shift: [0.5p+mcu_w+mcu_p+mcu_p-10.5, 0.5p-mcu_h-mcu_p-mcu_p-18]
         - ref: mirror_matrix_inner_top
-          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-15-7]
+          shift: [0, 0.5p-mcu_h-mcu_p-mcu_p-18-8]
         - ref: mirror_thumbfan_far_thumb
           shift: [-1p, 0.5p]
         - ref: mirror_thumbfan_far_thumb
@@ -197,7 +198,7 @@ pcbs:
         outline: pcb_plate
     footprints:
       mx_hotswap:
-        what: mx
+        what: mx_new
         where: true
         params:
           keycaps: true
@@ -216,80 +217,118 @@ pcbs:
       xiao_left:
         what: xiao
         params:
-          orientation: "up"
-          VCC5: "l_VCC5"
-          GND: "l_GND"
-          VCC3: "l_VCC3"
-          RST: "l_RST"
-          RAW: "l_RAW"
-          NFC0: "l_NFC0"
-          NFC1: "l_NFC1"
-          CLK: "l_CLK"
-          DIO: "l_DIO"
-          P0: "l_P0"
-          P1: "l_P1"
-          P2: "l_P2"
-          P3: "l_P3"
-          P4: "l_P4"
-          P5: "l_P5"
-          P6: "l_P6"
-          P7: "l_P7"
-          P8: "l_P8"
-          P9: "l_P9"
-          P10: "l_P10"
+          side: F
+          A0: l_A0
+          A1: l_A1
+          A10: l_A10
+          A2: l_A2
+          A3: l_A3
+          A4: l_A4
+          A5: l_A5
+          A6: l_A6
+          A7: l_A7
+          A8: l_A8
+          A9: l_A9
+          GND: l_GND
+          P_3V3: l_P_3V3
+          VCC: l_VCC
         where:
           ref: matrix_inner_top
-          shift: [mcu_p+mcu_w+mcu_p, mcu_p]
+          shift: [mcu_p+mcu_w+mcu_p, mcu_p+0.5]
           rotate: 0
-      trrs_left:
+      # trrs_left:
+      #   params:
+      #     side: B
+      #     TP: "l_TP"
+      #     R1: "l_R1"
+      #     R2: "l_R2"
+      #     SL: "l_SL"
+      #   what: trrs_pj320a
+      #   where:
+      #     ref: matrix_inner_home
+      #     shift: [trrs_w+9, -1.8mcu_p]
+      #     rotate: -90
+      # trrs_right:
+      #   params:
+      #     side: B
+      #     TP: "r_TP"
+      #     R1: "r_R1"
+      #     R2: "r_R2"
+      #     SL: "r_SL"
+      #   what: trrs_pj320a
+      #   where:
+      #     ref: mirror_matrix_inner_home
+      #     shift: [trrs_w+9, -1.8mcu_p]
+      #     rotate: -90
+      usbc_left:
+        what: usbc
         params:
-          side: B
-          TP: "l_TP"
-          R1: "l_R1"
-          R2: "l_R2"
-          SL: "l_SL"
-        what: trrs_pj320a
+          side: F
+          A1: l_A1u
+          A12: l_A12u
+          A4: l_A4u
+          A5: l_A5u
+          A6: l_A6u
+          A7: l_A7u
+          A8: l_A8u
+          A9: l_A9u
+          B1: l_B1u
+          B12: l_B12u
+          B4: l_B4u
+          B5: l_B5u
+          B6: l_B6u
+          B7: l_B7u
+          B8: l_B8u
+          B9: l_B9u
+          NP: l_NPu
         where:
           ref: matrix_inner_home
-          shift: [trrs_w+9, -1.8mcu_p]
-          rotate: -90
-      trrs_right:
+          shift: [17, -2.2mcu_p]
+          rotate: 90
+      usbc_right:
+        what: usbc
         params:
-          side: B
-          TP: "r_TP"
-          R1: "r_R1"
-          R2: "r_R2"
-          SL: "r_SL"
-        what: trrs_pj320a
+          side: F
+          A1: r_A1u
+          A12: r_A12u
+          A4: r_A4u
+          A5: r_A5u
+          A6: r_A6u
+          A7: r_A7u
+          A8: r_A8u
+          A9: r_A9u
+          B1: r_B1u
+          B12: r_B12u
+          B4: r_B4u
+          B5: r_B5u
+          B6: r_B6u
+          B7: r_B7u
+          B8: r_B8u
+          B9: r_B9u
+          NP: r_NPu
         where:
           ref: mirror_matrix_inner_home
-          shift: [trrs_w+9, -1.8mcu_p]
-          rotate: -90
+          shift: [17, -2.2mcu_p]
+          rotate: 90
       xiao_right:
         what: xiao
         params:
-          orientation: "up"
-          VCC5: "r_VCC5"
-          GND: "r_GND"
-          VCC3: "r_VCC3"
-          RST: "r_RST"
-          RAW: "r_RAW"
-          NFC0: "r_NFC0"
-          NFC1: "r_NFC1"
-          CLK: "r_CLK"
-          DIO: "r_DIO"
-          P0: "r_P0"
-          P1: "r_P1"
-          P2: "r_P2"
-          P3: "r_P3"
-          P4: "r_P4"
-          P5: "r_P5"
-          P6: "r_P6"
-          P7: "r_P7"
-          P8: "r_P8"
-          P9: "r_P9"
-          P10: "r_P10"
+          side: F
+          A0: r_A0
+          A1: r_A1
+          A10: r_A10
+          A2: r_A2
+          A3: r_A3
+          A4: r_A4
+          A5: r_A5
+          A6: r_A6
+          A7: r_A7
+          A8: r_A8
+          A9: r_A9
+          GND: r_GND
+          P_3V3: r_P_3V3
+          VCC: r_VCC
         where:
           ref: mirror_matrix_inner_top
-          shift: [mcu_p+mcu_w+mcu_p, mcu_p]
+          shift: [mcu_p+mcu_w+mcu_p, mcu_p+0.5]
           rotate: 0
