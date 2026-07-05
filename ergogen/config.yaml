@@ -52,7 +52,7 @@ points:
         inner:
           # COL5
           key:
-            column_net: l_A5
+            column_net: l_A4
             mirror.column_net: r_A4
             stagger: -2
       anchor:
@@ -80,7 +80,7 @@ points:
         far:
           #COL5
           key:
-            column_net: l_A5
+            column_net: l_A4
             mirror.column_net: r_A4
             spread: U
             splay: -15
@@ -228,6 +228,12 @@ outlines:
     - what: outline
       name: out
       operation: add
+    - what: circle
+      where:
+        ref: [matrix_index_bottom]
+        shift: [10, 0]
+      radius: 1
+      operation: subtract
 pcbs:
   ergojodi:
     outlines:
@@ -262,7 +268,7 @@ pcbs:
           A3: l_A3
           A4: l_A4
           A5: l_A5
-          A6: l_A6
+          A6: l_Dplus #l_A6
           A7: l_A7
           A8: l_A8
           A9: l_A9
@@ -300,53 +306,53 @@ pcbs:
       usbc_left:
         what: usbc
         params:
-          side: B
-          A1: l_A1u
-          A12: l_A12u
-          A4: l_A4u
+          side: F
+          A1: l_GND
+          A12: l_GND
+          A4: l_VCC
           A5: l_A5u
-          A6: l_A6u
-          A7: l_A7u
+          A6: l_Dplus
+          A7: l_Dminus
           A8: l_A8u
-          A9: l_A9u
-          B1: l_B1u
-          B12: l_B12u
-          B4: l_B4u
+          A9: l_VCC
+          B1: l_GND
+          B12: l_GND
+          B4: l_VCC
           B5: l_B5u
-          B6: l_B6u
-          B7: l_B7u
+          B6: l_Dplus
+          B7: l_Dminus
           B8: l_B8u
-          B9: l_B9u
-          NP: l_NPu
+          B9: l_VCC
+          NP: l_GND
         where:
           ref: matrix_inner_home
           shift: [17, -2.2mcu_p]
-          rotate: -90
+          rotate: 90
       usbc_right:
         what: usbc
         params:
-          side: B
-          A1: r_A1u
-          A12: r_A12u
-          A4: r_A4u
+          side: F
+          A1: r_GND
+          A12: r_GND
+          A4: r_VCC
           A5: r_A5u
-          A6: r_A6u
-          A7: r_A7u
+          A6: r_Dplus
+          A7: r_Dminus
           A8: r_A8u
-          A9: r_A9u
-          B1: r_B1u
-          B12: r_B12u
-          B4: r_B4u
+          A9: r_VCC
+          B1: r_GND
+          B12: r_GND
+          B4: r_VCC
           B5: r_B5u
-          B6: r_B6u
-          B7: r_B7u
+          B6: r_Dplus
+          B7: r_Dminus
           B8: r_B8u
-          B9: r_B9u
-          NP: r_NPu
+          B9: r_VCC
+          NP: r_GND
         where:
           ref: mirror_matrix_inner_home
           shift: [17, -2.2mcu_p]
-          rotate: -90
+          rotate: 90
       xiao_right:
         what: xiao
         params:
@@ -358,7 +364,7 @@ pcbs:
           A3: r_A3
           A4: r_A4
           A5: r_A5
-          A6: r_A6
+          A6: r_Dplus #r_A6
           A7: r_A7
           A8: r_A8
           A9: r_A9
