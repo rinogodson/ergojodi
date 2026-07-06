@@ -26,9 +26,9 @@ module.exports = {
   },
   body: (p) => {
     const model_text = `
-      (model "${p.switch_3d}" (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz -90 0 0)))
+      (model "${p.switch_3d}" (offset (xyz 0 -1 4.7)) (scale (xyz 1 1 1)) (rotate (xyz -90 0 0)))
       (model "${p.socket_3d}" (offset (xyz -0.600000 3.800000 -1.500000)) (scale (xyz 1 1 1)) (rotate (xyz 90 0 0)))
-      (model "${p.cap_3d}" (offset (xyz 0 0 11.6)) (scale (xyz 1 1 1)) (rotate (xyz -90 0 0)))
+      (model "${p.cap_3d}" (offset (xyz 0 0 11)) (scale (xyz 1 1 1)) (rotate (xyz -90 0 0)))
     `;
 
     const standard = `
