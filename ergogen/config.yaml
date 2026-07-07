@@ -6,14 +6,13 @@ units:
   m2_ext: 6/2
   m2_ext_height: 3
   m2_ext_hole: 2.2/2
-  m2_recess: 1.5
+  m2_recess: 1.8
+  m2_recess_radius: 4.5/2
   m2_boss: 3/2
   m2_boss_height: 1.4
   m2_hol: ((m2_boss*2)+0.1)/2
   m2_heat: 3.2
   m2_depth: 4
-
-  x_height: 11
 
   # trrs_w: 13
 
@@ -23,6 +22,10 @@ units:
   p: u+3
   p_in: p+1
   p_outer: p_in+wall_thick
+  top_thick: 1.4
+  x_height: wall_thick_original+m2_ext_height+pcb_thick+5-top_thick
+  k: 14
+  k_t: k+0.075
 
 points:
   zones:
@@ -115,7 +118,11 @@ outlines:
   keys:
     - what: rectangle
       where: true
-      size: [14, 14]
+      size: [k, k]
+  keys_cutout:
+    - what: rectangle
+      where: true
+      size: [k_t, k_t]
   m2_silk:
     - what: circle
       where:
@@ -187,6 +194,294 @@ outlines:
         shift: [-0.5p-0.5, 0.5p-4.5]
         rotate: 0
       radius: m2_ext
+      operation: add
+  m2_ext_hole:
+    - what: circle
+      where:
+        ref: matrix_pinky_top
+        shift: [0.5p+0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_pinky_bottom
+        shift: [0.5p+0.5, -0.5p+4.5]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_inner_bottom
+        shift: [0.5p-4.5, -0.5p-1]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_inner_home
+        shift: [0.5p+6, 0.5p-5]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+    - what: circle
+      where:
+        ref: thumbfan_far_thumb
+        shift: [-0.5p-0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+      # right
+    - what: circle
+      where:
+        ref: mirror_matrix_pinky_top
+        shift: [0.5p+0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_pinky_bottom
+        shift: [0.5p+0.5, -0.5p+4.5]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_inner_bottom
+        shift: [0.5p-4.5, -0.5p-1]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_inner_home
+        shift: [0.5p+6, 0.5p-5]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+    - what: circle
+      where:
+        ref: thumbfan_far_thumb
+        shift: [-0.5p-0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_ext_hole
+      operation: add
+  m2_recess:
+    - what: circle
+      where:
+        ref: matrix_pinky_top
+        shift: [0.5p+0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_pinky_bottom
+        shift: [0.5p+0.5, -0.5p+4.5]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_inner_bottom
+        shift: [0.5p-4.5, -0.5p-1]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_inner_home
+        shift: [0.5p+6, 0.5p-5]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+    - what: circle
+      where:
+        ref: thumbfan_far_thumb
+        shift: [-0.5p-0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+      # right
+    - what: circle
+      where:
+        ref: mirror_matrix_pinky_top
+        shift: [0.5p+0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_pinky_bottom
+        shift: [0.5p+0.5, -0.5p+4.5]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_inner_bottom
+        shift: [0.5p-4.5, -0.5p-1]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_inner_home
+        shift: [0.5p+6, 0.5p-5]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+    - what: circle
+      where:
+        ref: thumbfan_far_thumb
+        shift: [-0.5p-0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_recess_radius
+      operation: add
+  m2_ext:
+    - what: circle
+      where:
+        ref: matrix_pinky_top
+        shift: [0.5p+0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_pinky_bottom
+        shift: [0.5p+0.5, -0.5p+4.5]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_inner_bottom
+        shift: [0.5p-4.5, -0.5p-1]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_inner_home
+        shift: [0.5p+6, 0.5p-5]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+    - what: circle
+      where:
+        ref: thumbfan_far_thumb
+        shift: [-0.5p-0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+      # right
+    - what: circle
+      where:
+        ref: mirror_matrix_pinky_top
+        shift: [0.5p+0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_pinky_bottom
+        shift: [0.5p+0.5, -0.5p+4.5]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_inner_bottom
+        shift: [0.5p-4.5, -0.5p-1]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_inner_home
+        shift: [0.5p+6, 0.5p-5]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+    - what: circle
+      where:
+        ref: thumbfan_far_thumb
+        shift: [-0.5p-0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_ext
+      operation: add
+  m2_boss:
+    - what: circle
+      where:
+        ref: matrix_pinky_top
+        shift: [0.5p+0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_pinky_bottom
+        shift: [0.5p+0.5, -0.5p+4.5]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_inner_bottom
+        shift: [0.5p-4.5, -0.5p-1]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+    - what: circle
+      where:
+        ref: matrix_inner_home
+        shift: [0.5p+6, 0.5p-5]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+    - what: circle
+      where:
+        ref: thumbfan_far_thumb
+        shift: [-0.5p-0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+      # right
+    - what: circle
+      where:
+        ref: mirror_matrix_pinky_top
+        shift: [0.5p+0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_pinky_bottom
+        shift: [0.5p+0.5, -0.5p+4.5]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_inner_bottom
+        shift: [0.5p-4.5, -0.5p-1]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+    - what: circle
+      where:
+        ref: mirror_matrix_inner_home
+        shift: [0.5p+6, 0.5p-5]
+        rotate: 0
+      radius: m2_boss
+      operation: add
+    - what: circle
+      where:
+        ref: thumbfan_far_thumb
+        shift: [-0.5p-0.5, 0.5p-4.5]
+        rotate: 0
+      radius: m2_boss
       operation: add
   m2_hole:
     - what: circle
@@ -815,9 +1110,21 @@ cases:
       name: _innerWall
       operation: subtract
   _standoff:
-    - name: m2_hole
+    - name: m2_ext
       extrude: m2_ext_height+0.5
       shift: [0, 0, wall_thick_original-0.5]
+  _boss:
+    - name: m2_boss
+      extrude: m2_boss_height+0.5
+      shift: [0, 0, wall_thick_original+m2_ext_height-0.5]
+  _bottom_hole:
+    - name: m2_ext_hole
+      extrude: wall_thick_original+m2_ext_height+m2_boss_height+1
+      shift: [0, 0, -0.5]
+  _m2_recess:
+    - name: m2_recess
+      extrude: m2_recess
+      shift: [0, 0, 0]
   _caseoriginal:
     - what: case
       name: _wall
@@ -828,11 +1135,34 @@ cases:
     - what: case
       name: _standoff
       operation: add
+    - what: case
+      name: _boss
+      operation: add
+    - what: case
+      name: _bottom_hole
+      operation: subtract
+    - what: case
+      name: _m2_recess
+      operation: subtract
     # - what: case
     #   name: _pcb
     #   operation: add
+
   caseoriginal:
     - what: case
       name: _caseoriginal
       operation: add
-      shift: [0, 0, -wall_thick_original-5]
+      shift: [0, 0, -wall_thick_original-m2_ext_height]
+
+  _top_plate:
+    - name: caseouter
+      extrude: top_thick
+    - name: keys_cutout
+      operation: subtract
+      extrude: top_thick+0.1
+
+  top_plate:
+    - what: case
+      name: _top_plate
+      operation: add
+      shift: [0, 0, pcb_thick+5-top_thick]
