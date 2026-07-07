@@ -3,14 +3,26 @@ units:
   mcu_h: 20
   mcu_p: 2
 
-  m2_ext: 3
-  m2_hol: 2.1
+  m2_ext: 6/2
+  m2_ext_height: 3
+  m2_ext_hole: 2.2/2
+  m2_recess: 1.5
+  m2_boss: 3/2
+  m2_boss_height: 1.4
+  m2_hol: ((m2_boss*2)+0.1)/2
+  m2_heat: 3.2
+  m2_depth: 4
+
+  x_height: 11
 
   # trrs_w: 13
 
+  wall_thick_original: 3
+  wall_thick: wall_thick_original*2
+  pcb_thick: 1.6
   p: u+3
-  p_inner: u+3+1
-  p_outer: p_inner+3
+  p_in: p+1
+  p_outer: p_in+wall_thick
 
 points:
   zones:
@@ -255,60 +267,54 @@ outlines:
       operation: add
       points:
         - ref: thumbfan_near_thumb
-          shift: [-0.5p_inner, -0.5p_inner]
+          shift: [-0.5p_in, -0.5p_in]
         - ref: matrix_pinky_bottom
-          shift: [2p_inner+mcu_p-5, -0.5p_inner]
+          shift: [2p_in+mcu_p-5, -0.5p_in]
         - ref: matrix_pinky_bottom
-          shift: [-0.5p_inner, -0.5p_inner]
+          shift: [-0.5p_in, -0.5p_in]
         - ref: matrix_pinky_top
-          shift: [-0.5p_inner, 0.5p_inner]
+          shift: [-0.5p_in, 0.5p_in]
         - ref: matrix_pinky_top
-          shift: [0.5p_inner, 0.5p_inner]
+          shift: [0.5p_in, 0.5p_in]
         - ref: matrix_ring_top
-          shift: [-0.5p_inner, 0.5p_inner]
+          shift: [-0.5p_in, 0.5p_in]
         - ref: matrix_ring_top
-          shift: [0.5p_inner, 0.5p_inner]
-        - ref: matrix_index_top
-          shift: [0.5p_inner, 0.5p_inner]
+          shift: [0.5p_in, 0.5p_in]
         - ref: matrix_inner_top
-          shift: [-0.5p_inner+3, 0.5p_inner+2]
+          shift: [15, 0.5p_in+2+((p_in - p)/2)]
         - ref: matrix_inner_top
-          shift: [0.5p_inner+mcu_p+mcu_p+mcu_w, 0.5p_inner+2]
+          shift: [0.5p_in+mcu_p+mcu_p+mcu_w, 0.5p_in+2+((p_in - p)/2)]
+        - ref: matrix_inner_top
+          shift: [0.5p_in+mcu_p+mcu_p+mcu_w, 0.5p_in-mcu_h-mcu_p+2-(p_in-p)]
         - ref: matrix_inner_top
           shift:
-            [0.5p_inner+mcu_p+mcu_p+mcu_w, 0.5p_inner-mcu_h-mcu_p+2-(p_inner-p)]
+            [0.5p_in+mcu_w+mcu_p+mcu_p-10.8, 0.5p_in-mcu_h-mcu_p+2-7-(p_in-p)]
         - ref: matrix_inner_top
           shift:
             [
-              0.5p_inner+mcu_w+mcu_p+mcu_p-10.5,
-              0.5p_inner-mcu_h-mcu_p+2-7-(p_inner-p),
+              0.5p_in+mcu_w+mcu_p+mcu_p-10.8,
+              0.5p_in-mcu_h-mcu_p-mcu_p-18- (p_in-p),
             ]
         - ref: matrix_inner_top
-          shift:
-            [
-              0.5p_inner+mcu_w+mcu_p+mcu_p-10.5,
-              0.5p_inner-mcu_h-mcu_p-mcu_p-18- (p_inner-p),
-            ]
-        - ref: matrix_inner_top
-          shift: [0, 0.5p_inner-mcu_h-mcu_p-mcu_p-18-8-(p_inner-p)]
+          shift: [0, 0.5p_in-mcu_h-mcu_p-mcu_p-18-8-(p_in-p)]
         - ref: thumbfan_far_thumb
-          shift: [-1p_inner, 0.5p_inner]
+          shift: [-1p_in, 0.5p_in]
         - ref: thumbfan_far_thumb
-          shift: [0.5p_inner, 0.5p_inner]
+          shift: [0.5p_in, 0.5p_in]
         - ref: thumbfan_far_thumb
-          shift: [0.5p_inner, -0.5p_inner]
+          shift: [0.5p_in, -0.5p_in]
         - ref: thumbfan_far_thumb
-          shift: [-0.5p_inner, -0.5p_inner]
+          shift: [-0.5p_in, -0.5p_in]
         - ref: thumbfan_home_thumb
-          shift: [-0.5p_inner, -0.5p_inner]
+          shift: [-0.5p_in, -0.5p_in]
     - what: rectangle
       where: matrix_inner_bottom
-      size: [p_inner, 2.5p_inner]
+      size: [p_in, 2.5p_in]
       fillet: 5
       operation: add
     - what: rectangle
       where: matrix_middle_top
-      size: [p_inner, p_inner]
+      size: [p_in, p_in]
       fillet: 2
       operation: add
     # mirror
@@ -317,100 +323,90 @@ outlines:
       fillet: 2
       points:
         - ref: mirror_thumbfan_near_thumb
-          shift: [-0.5p_inner, -0.5p_inner]
+          shift: [-0.5p_in, -0.5p_in]
         - ref: mirror_matrix_pinky_bottom
-          shift: [2p_inner+mcu_p-5, -0.5p_inner]
+          shift: [2p_in+mcu_p-5, -0.5p_in]
         - ref: mirror_matrix_pinky_bottom
-          shift: [-0.5p_inner, -0.5p_inner]
+          shift: [-0.5p_in, -0.5p_in]
         - ref: mirror_matrix_pinky_top
-          shift: [-0.5p_inner, 0.5p_inner]
+          shift: [-0.5p_in, 0.5p_in]
         - ref: mirror_matrix_pinky_top
-          shift: [0.5p_inner, 0.5p_inner]
+          shift: [0.5p_in, 0.5p_in]
         - ref: mirror_matrix_ring_top
-          shift: [-0.5p_inner, 0.5p_inner]
+          shift: [-0.5p_in, 0.5p_in]
         - ref: mirror_matrix_ring_top
-          shift: [0.5p_inner, 0.5p_inner]
-        - ref: mirror_matrix_index_top
-          shift: [0.5p_inner, 0.5p_inner]
+          shift: [0.5p_in, 0.5p_in]
         - ref: mirror_matrix_inner_top
-          shift: [-0.5p_inner+3, 0.5p_inner+2]
+          shift: [0.5p_in+mcu_p+mcu_p+mcu_w, 0.5p_in+2]
         - ref: mirror_matrix_inner_top
-          shift: [0.5p_inner+mcu_p+mcu_p+mcu_w, 0.5p_inner+2]
+          shift: [0.5p_in+mcu_p+mcu_p+mcu_w, 0.5p_in-mcu_h-mcu_p+2-(p_in-p)]
         - ref: mirror_matrix_inner_top
           shift:
-            [0.5p_inner+mcu_p+mcu_p+mcu_w, 0.5p_inner-mcu_h-mcu_p+2-(p_inner-p)]
+            [0.5p_in+mcu_w+mcu_p+mcu_p-10.5, 0.5p_in-mcu_h-mcu_p+2-7-(p_in-p)]
         - ref: mirror_matrix_inner_top
           shift:
             [
-              0.5p_inner+mcu_w+mcu_p+mcu_p-10.5,
-              0.5p_inner-mcu_h-mcu_p+2-7-(p_inner-p),
+              0.5p_in+mcu_w+mcu_p+mcu_p-10.5,
+              0.5p_in-mcu_h-mcu_p-mcu_p-18- (p_in-p),
             ]
         - ref: mirror_matrix_inner_top
-          shift:
-            [
-              0.5p_inner+mcu_w+mcu_p+mcu_p-10.5,
-              0.5p_inner-mcu_h-mcu_p-mcu_p-18- (p_inner-p),
-            ]
-        - ref: mirror_matrix_inner_top
-          shift: [0, 0.5p_inner-mcu_h-mcu_p-mcu_p-18-8-(p_inner-p)]
+          shift: [0, 0.5p_in-mcu_h-mcu_p-mcu_p-18-8-(p_in-p)]
         - ref: mirror_thumbfan_far_thumb
-          shift: [-1p_inner, 0.5p_inner]
+          shift: [-1p_in, 0.5p_in]
         - ref: mirror_thumbfan_far_thumb
-          shift: [0.5p_inner, 0.5p_inner]
+          shift: [0.5p_in, 0.5p_in]
         - ref: mirror_thumbfan_far_thumb
-          shift: [0.5p_inner, -0.5p_inner]
+          shift: [0.5p_in, -0.5p_in]
         - ref: mirror_thumbfan_far_thumb
-          shift: [-0.5p_inner, -0.5p_inner]
+          shift: [-0.5p_in, -0.5p_in]
         - ref: mirror_thumbfan_home_thumb
-          shift: [-0.5p_inner, -0.5p_inner]
+          shift: [-0.5p_in, -0.5p_in]
     - what: rectangle
       where: mirror_matrix_inner_bottom
-      size: [p_inner, 2.5p_inner]
+      size: [p_in, 2.5p_in]
       fillet: 5
       operation: add
     - what: rectangle
       fillet: 2
       where: mirror_matrix_middle_top
-      size: [p_inner, p_inner]
+      size: [p_in, p_in]
       operation: add
   caseouter:
     - what: polygon
-      fillet: 2
+      fillet: 4
       operation: add
       points:
         - ref: thumbfan_near_thumb
           shift: [-0.5p_outer, -0.5p_outer]
         - ref: matrix_pinky_bottom
-          shift: [2p_outer+mcu_p-13, -0.5p_outer]
+          shift: [2p_outer+mcu_p-(wall_thick*4.3), -0.5p_outer]
         - ref: matrix_pinky_bottom
           shift: [-0.5p_outer, -0.5p_outer]
         - ref: matrix_pinky_top
           shift: [-0.5p_outer, 0.5p_outer]
         - ref: matrix_pinky_top
-          shift: [0.5p_outer-2, 0.5p_outer]
+          shift: [0.5p_outer-wall_thick, 0.5p_outer]
         - ref: matrix_ring_top
           shift: [-0.5p_outer, 0.5p_outer]
         - ref: matrix_ring_top
           shift: [0.5p_outer, 0.5p_outer]
-        - ref: matrix_index_top
-          shift: [0.5p_outer, 0.5p_outer]
         - ref: matrix_inner_top
-          shift: [-0.5p_outer+3, 0.5p_outer+2]
+          shift: [6, 0.5p_outer+0.3]
         - ref: matrix_inner_top
-          shift: [0.5p_outer+mcu_p+mcu_p+mcu_w, 0.5p_outer+2]
+          shift: [0.5p_outer+mcu_p+mcu_p+mcu_w, 0.5p_outer+0.3]
         - ref: matrix_inner_top
           shift:
             [0.5p_outer+mcu_p+mcu_p+mcu_w, 0.5p_outer-mcu_h-mcu_p+2-(p_outer-p)]
         - ref: matrix_inner_top
           shift:
             [
-              0.5p_outer+mcu_w+mcu_p+mcu_p-10.5,
-              0.5p_outer-mcu_h-mcu_p+2-7-(p_outer-p),
+              0.5p_outer+mcu_w+mcu_p+mcu_p-12.5,
+              0.5p_outer-mcu_h-mcu_p+2-4-(p_outer-p),
             ]
         - ref: matrix_inner_top
           shift:
             [
-              0.5p_outer+mcu_w+mcu_p+mcu_p-10.5,
+              0.5p_outer+mcu_w+mcu_p+mcu_p-12.5,
               0.5p_outer-mcu_h-mcu_p-mcu_p-18- (p_outer-p),
             ]
         - ref: matrix_inner_top
@@ -443,23 +439,19 @@ outlines:
         - ref: mirror_thumbfan_near_thumb
           shift: [-0.5p_outer, -0.5p_outer]
         - ref: mirror_matrix_pinky_bottom
-          shift: [2p_outer+mcu_p-13, -0.5p_outer]
+          shift: [2p_outer+mcu_p-(wall_thick*4.3), -0.5p_outer]
         - ref: mirror_matrix_pinky_bottom
           shift: [-0.5p_outer, -0.5p_outer]
         - ref: mirror_matrix_pinky_top
           shift: [-0.5p_outer, 0.5p_outer]
         - ref: mirror_matrix_pinky_top
-          shift: [0.5p_outer-2, 0.5p_outer]
+          shift: [0.5p_outer-wall_thick, 0.5p_outer]
         - ref: mirror_matrix_ring_top
           shift: [-0.5p_outer, 0.5p_outer]
         - ref: mirror_matrix_ring_top
-          shift: [0.5p_outer, 0.5p_outer]
-        - ref: mirror_matrix_index_top
-          shift: [0.5p_outer, 0.5p_outer]
+          shift: [0.5p_outer, 0.5p_outer-2+0.3]
         - ref: mirror_matrix_inner_top
-          shift: [-0.5p_outer+3, 0.5p_outer+2]
-        - ref: mirror_matrix_inner_top
-          shift: [0.5p_outer+mcu_p+mcu_p+mcu_w, 0.5p_outer+2]
+          shift: [0.5p_outer+mcu_p+mcu_p+mcu_w, 0.5p_outer+0.3]
         - ref: mirror_matrix_inner_top
           shift:
             [0.5p_outer+mcu_p+mcu_p+mcu_w, 0.5p_outer-mcu_h-mcu_p+2-(p_outer-p)]
@@ -516,10 +508,6 @@ outlines:
           shift: [-0.5p, 0.5p]
         - ref: matrix_ring_top
           shift: [0.5p, 0.5p]
-        - ref: matrix_index_top
-          shift: [0.5p, 0.5p]
-        - ref: matrix_inner_top
-          shift: [-0.5p+3, 0.5p+2]
         - ref: matrix_inner_top
           shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p+2]
         - ref: matrix_inner_top
@@ -569,10 +557,6 @@ outlines:
           shift: [-0.5p, 0.5p]
         - ref: mirror_matrix_ring_top
           shift: [0.5p, 0.5p]
-        - ref: mirror_matrix_index_top
-          shift: [0.5p, 0.5p]
-        - ref: mirror_matrix_inner_top
-          shift: [-0.5p+3, 0.5p+2]
         - ref: mirror_matrix_inner_top
           shift: [0.5p+mcu_p+mcu_p+mcu_w, 0.5p+2]
         - ref: mirror_matrix_inner_top
@@ -694,7 +678,7 @@ pcbs:
       xiao_left:
         what: xiao
         params:
-          side: B
+          side: F
           A0: l_A0
           A1: l_A1
           A10: l_A10
@@ -711,7 +695,7 @@ pcbs:
           VCC: l_VCC
         where:
           ref: matrix_inner_top
-          shift: [mcu_p+mcu_w+mcu_p, mcu_p+1]
+          shift: [mcu_p+mcu_w+mcu_p+0.5, mcu_p+1.3]
           rotate: 0
       # trrs_left:
       #   params:
@@ -790,7 +774,7 @@ pcbs:
       xiao_right:
         what: xiao
         params:
-          side: B
+          side: F
           A0: r_A0
           A1: r_A1
           A10: r_A10
@@ -807,18 +791,22 @@ pcbs:
           VCC: r_VCC
         where:
           ref: mirror_matrix_inner_top
-          shift: [mcu_p+mcu_w+mcu_p, mcu_p+1]
+          shift: [mcu_p+mcu_w+mcu_p+0.5, mcu_p+1.3]
           rotate: 0
 cases:
   _xlBottom:
     - name: caseouter
-      extrude: 3.5
+      extrude: wall_thick_original
+  # _pcb:
+  #   - name: pcb_plate
+  #     extrude: pcb_thick
+  #     shift: [0, 0, 5]
   _outerWall:
     - name: caseouter
-      extrude: 17.3
+      extrude: x_height
   _innerWall:
     - name: caseinner
-      extrude: 17.3
+      extrude: x_height
   _wall:
     - what: case
       name: _outerWall
@@ -828,9 +816,9 @@ cases:
       operation: subtract
   _standoff:
     - name: m2_hole
-      extrude: 17.3
-      operation: add
-  caseoriginal:
+      extrude: m2_ext_height+0.5
+      shift: [0, 0, wall_thick_original-0.5]
+  _caseoriginal:
     - what: case
       name: _wall
       operation: add
@@ -840,3 +828,11 @@ cases:
     - what: case
       name: _standoff
       operation: add
+    # - what: case
+    #   name: _pcb
+    #   operation: add
+  caseoriginal:
+    - what: case
+      name: _caseoriginal
+      operation: add
+      shift: [0, 0, -wall_thick_original-5]
