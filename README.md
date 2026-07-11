@@ -1,7 +1,7 @@
 ![ergojodi logo](https://cdn.hackclub.com/019f51ac-e14c-73a6-8832-17a9989c7b2c/image_13_1_.webp)
 
 ---
-### Fully custom hot-swappable split mechanical keyboard that features a very ergonomic layout and uses USB-C for everything, way better than accident-friendly TRRS. Runs on QMK software, controlling key functions. 
+### Fully custom hot-swappable split mechanical keyboard that features a very ergonomic layout and uses USB-C for everything, way better than accident-friendly TRRS. Runs on QMK software, controlling key functions. The fully assembled keyboard's 3D Model's STEP file is over 100MB, So, you can find the drive link in `assembly.md`
 The name comes from two words, "Ergo" meaning Ergonomics, and "Jodi" meaning pair.
 
 <img width="1500" height="95" alt="gray_run_8fps" src="https://github.com/user-attachments/assets/83e503b7-a4f6-4ba6-b996-f3c53b3906f7" />
